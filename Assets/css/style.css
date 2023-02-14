@@ -1,0 +1,84 @@
+.logo {
+    width:12em;
+}
+.carta {
+    height:10em;
+}
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 4em .5em;
+    padding: 1em;
+    background-color: gainsboro;
+}
+.redes img {
+    height:3em;
+    margin-right: 2em;
+}
+.abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+  }
+  form {
+    width: 50%;
+  }
+.angulo {
+    width:2em;
+}
+.carta {
+    width: 90%;
+    margin: 1rem;
+    box-shadow: -5px -5px 12px rgba(0,0,0, 0.5);
+}
+.card .btn {
+    box-shadow: -5px -5px 12px rgba(0,0,0, 0.5);
+}
+.cuadro {
+    border: 1px solid #000;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+}
+.cuadro-text {
+    flex-direction: column;
+    align-items:center;
+}
+.cartas {
+    background-color: azure;
+    display: flex;
+    justify-content:space-between;
+    gap: .5em;
+}
+@media only screen and (max-width:1024px){
+ .cartas {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 1em;
+ } 
+ 
+ .redes img {
+    padding: 0;
+    height: 2.5em;
+ }
+}
+@media only screen and (max-width:600px){
+  .cartas {
+   flex-direction: column;
+   justify-content: space-between;
+   
+  }
+  .redes {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .redes img {
+    height:2.4em;
+    padding: .25em;
+  }
+  .redes h2 {
+    margin-bottom:0;
+  }
+}
