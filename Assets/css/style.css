@@ -55,7 +55,7 @@ footer {
  .cartas {
     flex-wrap: wrap;
     justify-content: space-evenly;
-    gap: 1em;
+    gap: 2em;
  } 
  
  .redes img {
@@ -68,10 +68,10 @@ footer {
 }
 @media only screen and (max-width:600px){
   .cartas {
-   flex-direction: column;
-   justify-content: space-between;
-   
+   gap:1em;
+   align-items: center;
   }
+  
   .redes {
     display: flex;
     flex-direction: column;
