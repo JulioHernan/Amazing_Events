@@ -62,6 +62,9 @@ footer {
     padding: 0;
     height: 2.5em;
  }
+ .nav-item a {
+  text-align: center;
+ }
 }
 @media only screen and (max-width:600px){
   .cartas {
