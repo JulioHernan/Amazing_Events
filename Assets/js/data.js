@@ -171,23 +171,89 @@ var data = {
       }
     ]
   };
-
-  function imprimiCards(array) {
-    for (let event of array) {
-    contenedor.innerHTML += `<div class="card align-self-strecht" style="width: 18rem;">
-    <img src="${event.image}" alt="${event.name}" class="carta card-img-top">
-    <div class="card-body text-center">
-      <h5 class="card-title">${event.name}</h5>
-      <p class="card-text">Date: ${event.date}</p>
-      <p class="card-text">${event.description}</p>
-      <p class="card-text">Date: ${event.category}</p>
-      <p class="card-text">Date: ${event.place}</p>
-      <p class="card-text">Date: ${event.assistance}</p>
-      <div class="d-flex justify-content-around align-items-center" >
-      <span>Precio: $${event.price} </span>
-      <a href="./details.html" class="btn btn-primary">Ver mas</a>
-      </div>
-    </div>
-  </div>`
+  
+  let categories = []
+  let casillas
+  let inputBusqueda = document.querySelector("input[type=search]") 
+ 
+  function renderCards(data) {
+    let contenedor = document.querySelector(".cartas")
+    for (let event of eventos) {
+        let assistanceOrEstimate = event.assistance ? `Assistance: ${event.assistance}` : 
+        `Estimate: ${event.estimate}`;
+        contenedor.innerHTML += `<div class="card align-self-strecht" style="width: 18rem;">
+            <img src="${event.image}" alt="${event.name}" class="carta card-img-top">
+            <div class="card-body text-center">
+                <h5 class="card-title">${event.name}</h5>
+                <p class="card-text">Date: ${event.date}</p>
+                <p class="card-text">${event.description}</p>
+                <p class="card-text">Category: ${event.category}</p>
+                <p class="card-text">Place: ${event.place}</p>
+                <p class="card-text">Capacity: ${event.capacity}</p>
+                <p class="card-text">${assistanceOrEstimate}</p>
+                <div class="d-flex justify-content-around align-items-center">
+                    <span>Price: $${event.price} </span>
+                    <a href="./details.html?id=${event._id}" class="btn btn-primary">Ver mas</a>
+                </div>
+            </div>
+        </div>`
     }
+}  
+
+function getUniqueCategories(data) {
+  let categories = []
+  eventos.forEach(event => {
+    if (!categories.includes(event.category)) {
+      categories.push(event.category)
+    }
+  })
+  return categories
 }
+
+function addCategoriesToHTML(categories, containerSelector) {
+  let container = document.querySelector(containerSelector);
+  categories.forEach(category => {
+    let label = document.createElement('label');
+    label.textContent = category;
+    let checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = category;
+    label.appendChild(checkbox);
+    container.appendChild(label);
+  });
+}
+
+
+casillas = document.querySelectorAll("input[type=checkbox]")
+casillas.forEach(checkbox => {
+  checkbox.addEventListener("change", () => {
+    renderSearch()
+  })
+})
+
+inputBusqueda.addEventListener("input", () => {
+  renderSearch()
+})
+
+function getChecked() {
+  let chequeados = []
+  casillas.forEach(checkbox => {
+    if (checkbox.checked) chequeados.push(checkbox.value)
+  })
+  return chequeados
+}
+
+function renderSearch() {
+  let textSearch = inputBusqueda.value
+  let tiposChequeados =getChecked()
+  let result = eventos.filter(categoria =>
+    categoria.toLowerCase().includes(textSearch.toLowerCase()))
+  if (tiposChequeados.length > 0) {
+        result = result.filter(uniqueCategories => {
+       
+  return tiposChequeados.some(tipo => uniqueCategories.includes(tipo));
+      });
+  }
+  renderCards(result)
+}
+

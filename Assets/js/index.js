@@ -1,7 +1,6 @@
-console.log("hola Julio")
-const container = document.getElementById('event-container');
-
-let contenedor = document.querySelector(".cartas")
 let eventos = data.events
+let uniqueCategories = getUniqueCategories(eventos)
 
-imprimiCards(eventos)
+addCategoriesToHTML(uniqueCategories,'.chequeo')
+
+renderCards(eventos)
